@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block wiki_pagetitle %}
+iegget.no
+{% endblock %}
+
+{% block wiki_contents %}
+
+<div>
+  <h3>Welcome</h3>
+  <hr>
+  <p>Landjaeger drumstick bacon leberkas chicken cow, turkey short loin doner picanha pig alcatra tri-tip turducken. Drumstick bresaola pork belly flank. Pig fatback meatball jerky leberkas frankfurter. Drumstick beef jowl ball tip sirloin. Biltong doner kielbasa pig alcatra porchetta ground round cupim sausage.</p>
+</div>
+
+<div>
+  <h3>Latest entries in the Wiki</h3>
+  <hr>
+
+  {% for article in articles %}
+  <a href="{{ article.get_absolute_url }}"><h4>{{ article.current_revision.title }}</h4></a>
+  {{ article.render }}
+  {% endfor %}
+</div>
+
+{% endblock %}
