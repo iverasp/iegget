@@ -106,7 +106,7 @@ WSGI_APPLICATION = 'iegget.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'iegget.db'),
+        'NAME': '/home/iw/iwasperu/webapps/iegget/iegget/iegget.db',
     }
 }
 
