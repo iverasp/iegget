@@ -26,10 +26,10 @@ def about(request):
 def render_article(article):
     if len(article.current_revision.content) > PREVIEW_ARTICLE_LENGTH:
         return {
-            'render' :mark_safe(article_markdown(
-            article.current_revision.content[0:PREVIEW_ARTICLE_LENGTH] + ' (...)',
+            'render': mark_safe(article_markdown(
+            article.current_revision.content[0:PREVIEW_ARTICLE_LENGTH],
             article.current_revision
-            )),
+            )) + mark_safe('<p><a href=') + mark_safe(article.get_absolute_url()) + mark_safe('>(more...)</a></p>'),
             'url': article.get_absolute_url(),
             'title': article.current_revision.title
         }
