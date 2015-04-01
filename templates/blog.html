@@ -17,8 +17,10 @@ iegget.no
   <hr>
 
   {% for article in articles %}
-  <a href="{{ article.get_absolute_url }}"><h4>{{ article.current_revision.title }}</h4></a>
-  {{ article.render }}
+  <div class="blog_article">
+    <a href="{{ article.url }}"><h4>{{ article.title }}</h4></a>
+    {{ article.render }}
+  </div>
   {% endfor %}
 </div>
 
