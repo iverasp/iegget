@@ -22,11 +22,11 @@ TEMPLATE_DEBUG = True
 ALLOWED_HOSTS = []
 
 # django-wiki
-WIKI_ACCOUNT_HANDLING = False
+WIKI_ACCOUNT_HANDLING = True
 WIKI_ACCOUNT_SIGNUP_ALLOWED = False
 SITE_ID = 1
-LOGIN_URL = "/admin"
-LOGOUT_URL = "/admin/logout"
+LOGIN_URL = "/auth/login"
+LOGOUT_URL = "/auth/logout"
 
 WIKI_ATTACHMENTS_EXTENSIONS = [
     'pdf',
@@ -68,6 +68,7 @@ INSTALLED_APPS = (
     'wiki.plugins.images',
     'wiki.plugins.macros',
     'apps.blog',
+    'apps.userauth',
 )
 
 MIDDLEWARE_CLASSES = (

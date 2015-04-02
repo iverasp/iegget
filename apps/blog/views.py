@@ -10,11 +10,7 @@ def index(request):
     articles = []
     for article in recent_articles:
         articles.append(render_article(article))
-        print(article.current_revision.title)
-        print(article.current_revision.content[0:40])
-        print(article.get_absolute_url())
-        print(render_article(article))
-    print(articles)
+    #print(articles)
     context = {
         'articles': articles,
     }
@@ -25,19 +21,19 @@ def about(request):
 
 def render_article(article):
     if len(article.current_revision.content) > PREVIEW_ARTICLE_LENGTH:
-        return {
-            'render': mark_safe(article_markdown(
-            article.current_revision.content[0:PREVIEW_ARTICLE_LENGTH],
+        render = mark_safe(article_markdown(
+            article.current_revision.content[0:PREVIEW_ARTICLE_LENGTH] + mark_safe('...'),
             article.current_revision
-            )) + mark_safe('<p><a href=') + mark_safe(article.get_absolute_url()) + mark_safe('>(more...)</a></p>'),
-            'url': article.get_absolute_url(),
-            'title': article.current_revision.title
-        }
+        ))  + mark_safe('<p><a href="') \
+            + mark_safe(article.get_absolute_url()) \
+            + mark_safe('">(more...)</a></p>')
+    else:
+        render = mark_safe(article_markdown(
+            article.current_revision.content,
+            article.current_revision
+        ))
     return {
-        'render' :mark_safe(article_markdown(
-        article.current_revision.content,
-        article.current_revision
-        )),
+        'render': render,
         'url': article.get_absolute_url(),
         'title': article.current_revision.title
     }
