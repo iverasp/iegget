@@ -8,6 +8,7 @@ from iegget.settings import UPLOAD_PATH
 import uuid
 from django.http import HttpResponse
 from django.core.servers.basehttp import FileWrapper
+from django.http import Http404
 
 @login_required
 def index(request):
@@ -38,7 +39,8 @@ def get(request, uuid):
             response = HttpResponse(FileWrapper(filestream), content_type=file.mimetype[0])
             response['Content-Disposition'] = 'attachment; filename=' + file.file
             return response
-    return index(request)
+    context = {'file': file}
+    raise Http404("File does not exist")
 
 def handle_file_upload(file):
     filename = make_unique_filename()

@@ -3,3 +3,4 @@ SECRET_KEY = 'supersecret'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+ALLOWED_HOSTS = ['*']
