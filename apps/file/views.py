@@ -35,7 +35,7 @@ def get(request, uuid):
     file = File.objects.filter(**{'uuid__contains': uuid}).first()
     if file:
         print(file)
-        with open(UPLOAD_PATH + str(file.filename)) as filestream:
+        with open(settings.UPLOAD_PATH + str(file.filename)) as filestream:
             response = HttpResponse(FileWrapper(filestream), content_type=file.mimetype[0])
             response['Content-Disposition'] = 'attachment; filename=' + file.file
             return response
