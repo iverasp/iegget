@@ -38,6 +38,7 @@ def get(request, uuid):
             response = HttpResponse(FileWrapper(filestream), content_type=file.mimetype[0])
             response['Content-Disposition'] = 'attachment; filename=' + file.file
             return response
+    return index(request)
 
 def handle_file_upload(file):
     filename = make_unique_filename()
