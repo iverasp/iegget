@@ -4,7 +4,7 @@ from django.shortcuts import render_to_response,redirect
 from django.contrib.auth.decorators import login_required
 from forms import FileForm
 from models import File
-from iegget.settings import UPLOAD_PATH
+from django.conf import settings
 import uuid
 from django.http import HttpResponse
 from django.core.servers.basehttp import FileWrapper
@@ -44,7 +44,7 @@ def get(request, uuid):
 
 def handle_file_upload(file):
     filename = make_unique_filename()
-    with open(UPLOAD_PATH + str(filename), 'wb+') as destination:
+    with open(settings.UPLOAD_PATH + str(filename), 'wb+') as destination:
         for chunk in file.chunks():
             destination.write(chunk)
     return filename

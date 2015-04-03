@@ -21,7 +21,7 @@ iegget.no - Files
 <hr>
 
 <div id="dropzone">
-  <form action="{% url 'upload' %}" class="dropzone">
+  <form action="{% url 'upload' %}" class="dropzone" id="dropzone_form">
   {% csrf_token %}
   <div class="dz-message">
     <br>Drop files here or click to upload.<br />
@@ -29,19 +29,17 @@ iegget.no - Files
   </form>
 </div>
 
-<div>
+<div class="row" id="upload">
   <h3>Uploaded files</h3>
   <hr>
   {% for file in files %}
-  <p>
-    <div>
+  <div class="col-md-4">
     <a href="{% url 'get' file.uuid %}">
       <img src="{{STATIC_URL}}img/mime/{{ file.filetype }}-icon-48x48.png">
       {{ file.file }}</br>
       {{ file.date }}
     </a>
-    </div>
-  </p>
+  </div>
   {% endfor %}
 </div>
 
