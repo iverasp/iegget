@@ -10,7 +10,7 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^', include('apps.blog.urls')),
     url(r'^auth/', include('apps.userauth.urls')),
-
+    url(r'^file/', include('apps.file.urls')),
 )
 
 from wiki.urls import get_pattern as get_wiki_pattern

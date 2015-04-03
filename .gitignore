@@ -1,3 +1,6 @@
+### uploaded files ###
+upload/*
+
 ### django-wiki attachments ###
 wiki/attachments/*
 

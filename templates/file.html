@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% load sekizai_tags %}
+
+{% block wiki_pagetitle %}
+iegget.no - Files
+{% endblock %}
+
+{% block wiki_contents %}
+
+{% addtoblock "js" %}
+<script src="{{STATIC_URL}}js/dropzone.js"></script>
+<script src="{{STATIC_URL}}js/file.js"></script>
+{% endaddtoblock %}
+
+{% addtoblock "css" %}
+<link href="{{STATIC_URL}}css/dropzone.css" rel="stylesheet"/>
+{% endaddtoblock %}
+
+<h3>Upload file</h3>
+<hr>
+
+<div id="dropzone">
+  <form action="{% url 'upload' %}" class="dropzone">
+  {% csrf_token %}
+  <div class="dz-message">
+    <br>Drop files here or click to upload.<br />
+  </div>
+  </form>
+</div>
+
+<div>
+  <h3>Uploaded files</h3>
+  <hr>
+  {% for file in files %}
+  <p>
+    <div>
+    <a href="{% url 'get' file.uuid %}">
+      <img src="{{STATIC_URL}}img/mime/{{ file.filetype }}-icon-48x48.png">
+      {{ file.file }}</br>
+      {{ file.date }}
+    </a>
+    </div>
+  </p>
+  {% endfor %}
+</div>
+
+
+
+{% endblock %}

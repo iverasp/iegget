@@ -47,6 +47,8 @@ WIKI_ATTACHMENTS_EXTENSIONS = [
     'patch',
 ]
 
+UPLOAD_PATH = os.path.join(BASE_DIR, 'upload/')
+
 # Application definition
 
 INSTALLED_APPS = (
@@ -67,8 +69,10 @@ INSTALLED_APPS = (
     'wiki.plugins.notifications',
     'wiki.plugins.images',
     'wiki.plugins.macros',
+    'shortuuid',
     'apps.blog',
     'apps.userauth',
+    'apps.file',
 )
 
 MIDDLEWARE_CLASSES = (
