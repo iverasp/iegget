@@ -4,3 +4,11 @@
   padding: 15px 20px;
   margin: 20px 0;
 }
+
+#upload div {
+  padding: 5px;
+}
+
+#upload li {
+  list-style: none;
+}

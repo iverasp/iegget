@@ -34,11 +34,24 @@ iegget.no - Files
   <hr>
   {% for file in files %}
   <div class="col-md-4">
-    <a href="{% url 'get' file.uuid %}">
-      <img src="{{STATIC_URL}}img/mime/{{ file.filetype }}-icon-48x48.png">
-      {{ file.file }}</br>
-      {{ file.date }}
-    </a>
+    <div class="col-md-2">
+      <a href="{% url 'get' file.uuid %}">
+        <img style="float-left" src="{{STATIC_URL}}img/mime/{{ file.filetype }}-icon-48x48.png">
+      </a>
+    </div>
+    <div class="col-md-10">
+      <li>
+        <a href="{% url 'get' file.uuid %}">
+          {{ file.file }}
+        </a>
+      </li>
+      <li>{{ file.date }}</li>
+      <li>
+        <i class="fa fa-trash-o" id="delete"
+          onclick="remove_file(this.parentElement.parentElement.parentElement, '{{ file.uuid }}')"
+          style="cursor: pointer;"> Remove</i>
+      </li>
+    </div>
   </div>
   {% endfor %}
 </div>

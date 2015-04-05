@@ -2,25 +2,30 @@ from django.shortcuts import render
 from django.template import RequestContext
 from django.shortcuts import render_to_response,redirect
 from django.contrib.auth.decorators import login_required
-from forms import FileForm
+from forms import FileUploadForm, FileDeleteForm
 from models import File
 from django.conf import settings
 import uuid
 from django.http import HttpResponse
 from django.core.servers.basehttp import FileWrapper
-from django.http import Http404
+from django.http import HttpResponse
+
+from wiki.core.plugins import registry
+from wiki.plugins.macros import wiki_plugin
 
 @login_required
 def index(request):
     context = {
         'files': File.objects.all(),
     }
+    for plugin in registry.get_plugins():
+        print(plugin)
     return render(request, 'file.html', context)
 
 @login_required
 def upload(request):
     if request.POST:
-        form = FileForm(request.POST, request.FILES)
+        form = FileUploadForm(request.POST, request.FILES)
         if form.is_valid():
             print(request.FILES)
             filename = handle_file_upload(request.FILES['file'])
@@ -31,6 +36,18 @@ def upload(request):
 
     return render_to_response('file.html', context_instance=RequestContext(request))
 
+@login_required
+def delete(request):
+    if request.POST:
+        form = FileDeleteForm(request.POST)
+        if form.is_valid():
+            uuid = request.POST.get('uuid', '')
+            print(uuid)
+            file = File.objects.filter(**{'uuid__contains': uuid}).first()
+            file.delete()
+            return HttpResponse(status=200)
+    return HttpResponse(status=403)
+
 def get(request, uuid):
     file = File.objects.filter(**{'uuid__contains': uuid}).first()
     if file:
@@ -40,7 +57,7 @@ def get(request, uuid):
             response['Content-Disposition'] = 'attachment; filename=' + file.file
             return response
     context = {'file': file}
-    raise Http404("File does not exist")
+    return HttpResponse(status=404)
 
 def handle_file_upload(file):
     filename = make_unique_filename()

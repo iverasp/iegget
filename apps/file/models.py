@@ -2,6 +2,10 @@ from django.db import models
 from os import path
 import shortuuid
 import mimetypes
+from django.db.models.signals import pre_delete
+from django.dispatch import receiver
+from os import remove
+from django.conf import settings
 
 class File(models.Model):
 
@@ -25,7 +29,13 @@ class File(models.Model):
         )
 
     def __str__(self):
-        return "<File: " + str(self.file) + ", UUID: " + str(self.uuid) + ">"
+        #return "<File: " + str(self.file) + ", UUID: " + str(self.uuid) + ">"
+        return str(self.file)
+
+    @receiver(pre_delete)
+    def delete_file(sender, instance, **kwargs):
+        print("deleting file", instance.filename)
+        remove(settings.UPLOAD_PATH + instance.filename)
 
 def generate_uuid():
     return shortuuid.uuid()

@@ -51,29 +51,32 @@ UPLOAD_PATH = os.path.join(BASE_DIR, 'upload/')
 
 # Application definition
 
-INSTALLED_APPS = (
-    'django.contrib.admin',
+INSTALLED_APPS = [
+    'django.contrib.humanize',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
+    'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django.contrib.sites', # django 1.6.2
-    'django.contrib.humanize',
-    'django_nyt',
-    'mptt',
+    'django.contrib.admin',
+    'django.contrib.admindocs',
     'sekizai',
     'sorl.thumbnail',
+    'django_nyt',
     'wiki',
+    'wiki.plugins.macros',
+    'wiki.plugins.help',
+    'wiki.plugins.links',
+    'wiki.plugins.images',
     'wiki.plugins.attachments',
     'wiki.plugins.notifications',
-    'wiki.plugins.images',
-    'wiki.plugins.macros',
+    'mptt',
     'shortuuid',
     'apps.blog',
     'apps.userauth',
     'apps.file',
-)
+]
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -94,6 +97,12 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.tz",
     "django.contrib.messages.context_processors.messages",
     "sekizai.context_processors.sekizai",
+)
+
+TEMPLATE_LOADERS = (
+    'django.template.loaders.filesystem.Loader',
+    'django.template.loaders.app_directories.Loader',
+    #     'django.template.loaders.eggs.Loader',
 )
 
 TEMPLATE_DIRS = (

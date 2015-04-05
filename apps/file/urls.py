@@ -9,5 +9,6 @@ urlpatterns = patterns(
     url(r'^$', 'index', name='index'),
     url(r'^upload/', 'upload', name='upload'),
     url(r'^get/(?P<uuid>[^/]+)/$', 'get', name='get'),
+    url(r'^delete/', 'delete', name='delete'),
 
 )

@@ -1,3 +1,9 @@
 from django.db import models
 
-# Create your models here.
+class Welcome(models.Model):
+    text = models.TextField()
+    enabled = models.BooleanField(default=True)
+
+class About(models.Model):
+    text = models.TextField()
+    enabled = models.BooleanField(default=True)
