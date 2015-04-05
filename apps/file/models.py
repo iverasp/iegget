@@ -34,7 +34,6 @@ class File(models.Model):
 
     @receiver(pre_delete)
     def delete_file(sender, instance, **kwargs):
-        print("deleting file", instance.filename)
         remove(settings.UPLOAD_PATH + instance.filename)
 
 def generate_uuid():
@@ -42,5 +41,4 @@ def generate_uuid():
 
 def find_filetype(filename):
     name, file_ext = path.splitext(filename)
-    print(name)
     return file_ext.split('.')[1]

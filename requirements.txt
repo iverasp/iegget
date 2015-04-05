@@ -1,3 +1,4 @@
 Django==1.7.7
 git+https://github.com/django-wiki/django-wiki.git@adb4e2ea21745da40d8c123ce7a369ab3acab5d2#egg=wiki==0.1.dev0
 shortuuid
+django-suit
