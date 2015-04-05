@@ -11,7 +11,6 @@ urlpatterns = patterns('',
     url(r'^', include('apps.blog.urls')),
     url(r'^auth/', include('apps.userauth.urls')),
     url(r'^file/', include('apps.file.urls')),
-    url(r'^edit/', include('content_edit.urls')),
 )
 
 from wiki.urls import get_pattern as get_wiki_pattern
