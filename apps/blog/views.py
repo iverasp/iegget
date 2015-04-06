@@ -7,7 +7,7 @@ from models import Welcome, About
 PREVIEW_ARTICLE_LENGTH = 300
 
 def index(request):
-    recent_articles = Article.objects.order_by('-created')[0:3]
+    recent_articles = Article.objects.filter(other_read=True).order_by('-created')[0:3]
     articles = []
     for article in recent_articles:
         articles.append(render_article(article))

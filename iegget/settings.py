@@ -25,8 +25,8 @@ ALLOWED_HOSTS = []
 WIKI_ACCOUNT_HANDLING = True
 WIKI_ACCOUNT_SIGNUP_ALLOWED = False
 SITE_ID = 1
-LOGIN_URL = "/auth/login"
-LOGOUT_URL = "/auth/logout"
+#LOGIN_URL = "/auth/login"
+#LOGOUT_URL = "/auth/logout"
 
 WIKI_ATTACHMENTS_EXTENSIONS = [
     'pdf',
