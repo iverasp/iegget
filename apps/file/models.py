@@ -7,6 +7,9 @@ from django.dispatch import receiver
 from os import remove
 from django.conf import settings
 
+def file_cleanup(sender, instance, *args, **kwargs):
+    remove(settings.UPLOAD_PATH + instance.filename)
+
 class File(models.Model):
 
     file = models.CharField(max_length=255)
@@ -16,6 +19,7 @@ class File(models.Model):
     filetype = models.CharField(max_length=255)
     mimetype = models.CharField(max_length=255)
     size = models.FloatField(default=0)
+
 
     @classmethod
     def create(cls, title, filename):
@@ -32,9 +36,11 @@ class File(models.Model):
         #return "<File: " + str(self.file) + ", UUID: " + str(self.uuid) + ">"
         return str(self.file)
 
-    @receiver(pre_delete)
-    def delete_file(sender, instance, **kwargs):
-        remove(settings.UPLOAD_PATH + instance.filename)
+#    @receiver(pre_delete, sender=File)
+#    def delete_file(sender, instance, **kwargs):
+#        remove(settings.UPLOAD_PATH + instance.filename)
+
+pre_delete.connect(file_cleanup, sender=File)
 
 def generate_uuid():
     return shortuuid.uuid()
