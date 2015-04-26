@@ -21,8 +21,15 @@ TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = []
 
+# two step auth
+TWO_FACTOR_SMS_GATEWAY = 'sms_translator.SMSTranslator'
+
+from django.core.urlresolvers import reverse_lazy
+LOGIN_URL = reverse_lazy('two_factor:login')
+LOGOUT_URL = reverse_lazy('admin:logout')
+
 # django-wiki
-WIKI_ACCOUNT_HANDLING = True
+WIKI_ACCOUNT_HANDLING = False
 WIKI_ACCOUNT_SIGNUP_ALLOWED = False
 SITE_ID = 1
 #LOGIN_URL = "/auth/login"
@@ -74,6 +81,10 @@ INSTALLED_APPS = [
     'wiki.plugins.notifications',
     'mptt',
     'shortuuid',
+    'django_otp',
+    'django_otp.plugins.otp_static',
+    'django_otp.plugins.otp_totp',
+    'two_factor',
     'apps.blog',
     'apps.userauth',
     'apps.file',
@@ -86,6 +97,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django_otp.middleware.OTPMiddleware',
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
