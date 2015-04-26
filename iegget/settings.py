@@ -22,9 +22,11 @@ TEMPLATE_DEBUG = True
 ALLOWED_HOSTS = []
 
 # two step auth
+TWO_FACTOR_SMS_GATEWAY = 'sms_translator.SMSTranslator'
 
 from django.core.urlresolvers import reverse_lazy
 LOGIN_URL = reverse_lazy('two_factor:login')
+LOGOUT_URL = reverse_lazy('admin:logout')
 
 # django-wiki
 WIKI_ACCOUNT_HANDLING = False
