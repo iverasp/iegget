@@ -3,6 +3,7 @@ cache
 
 ### uploaded files ###
 upload/*
+uploaded_media/*
 
 ### django-wiki attachments ###
 wiki/attachments/*

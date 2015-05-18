@@ -17,7 +17,7 @@ PROJECT_ROOT_DIRECTORY = os.path.join(PROJECT_SETTINGS_DIRECTORY, '..')
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
 
-TEMPLATE_DEBUG = True
+TEMPLATE_DEBUG = False
 
 ALLOWED_HOSTS = []
 
@@ -48,6 +48,7 @@ WIKI_ATTACHMENTS_EXTENSIONS = [
     'ai',
     'ods',
     'zip',
+    'rar',
     'jpg',
     'jpeg',
     'gif',
@@ -55,6 +56,9 @@ WIKI_ATTACHMENTS_EXTENSIONS = [
 ]
 
 UPLOAD_PATH = os.path.join(BASE_DIR, 'upload/')
+
+MEDIA_ROOT= os.path.join(BASE_DIR, 'uploaded_media/')
+MEDIA_URL = '/media/'
 
 # Application definition
 
