@@ -10,3 +10,15 @@ TODO:
 - change to ldap auth backend
 - make some sort of SSO solution to be used across different webapps
 - find some way to remove the "Sign up" link on all wiki pages
+
+
+#### *nix requirements
+
+For images in django-wiki
+
+    apt-get install libjpeg-dev zlib1g-dev libpng12-dev 
+
+Reinstall pillow afterwards to compile with support for the formats above
+
+    pip uninstall pillow
+    pip install pillow
