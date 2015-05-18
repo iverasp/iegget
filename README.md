@@ -17,3 +17,8 @@ TODO:
 For images in django-wiki
 
     apt-get install libjpeg-dev zlib1g-dev libpng12-dev 
+
+Reinstall pillow afterwards to compile with support for the formats above
+
+    pip uninstall pillow
+    pip install pillow
