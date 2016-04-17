@@ -7,10 +7,11 @@ from models import Welcome, About
 PREVIEW_ARTICLE_LENGTH = 300
 
 def index(request):
-    recent_articles = Article.objects.filter(other_read=True).order_by('-created')[0:3]
+    recent_articles = Article.objects.filter(other_read=True).order_by('-created')[0:15]
     articles = []
     for article in recent_articles:
-        articles.append(render_article(article))
+        if is_leaf_article(article):
+            articles.append(render_article(article))
     welcome = Welcome.objects.get(enabled=True)
     context = {
         'articles': articles,
@@ -25,7 +26,11 @@ def about(request):
     }
     return render(request, 'about.html', context)
 
+def is_leaf_article(article):
+    return "article_list" not in article.current_revision.content
+
 def render_article(article):
+    """
     if len(article.current_revision.content) > PREVIEW_ARTICLE_LENGTH:
         render = mark_safe(article_markdown(
             article.current_revision.content[0:PREVIEW_ARTICLE_LENGTH] + mark_safe('...'),
@@ -42,4 +47,10 @@ def render_article(article):
         'render': render,
         'url': article.get_absolute_url(),
         'title': article.current_revision.title
+    }
+    """
+    return {
+        'url': article.get_absolute_url(),
+        'title': article.current_revision.title,
+        'date': article.modified
     }

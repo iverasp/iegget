@@ -18,8 +18,7 @@ iegget.no
 
   {% for article in articles %}
   <div class="blog_article">
-    <a href="{{ article.url }}"><h4>{{ article.title }}</h4></a>
-    {{ article.render }}
+    <a href="{{ article.url }}"><h4>{{ article.title }}</h4></a> <p>{{ article.date }} </p>
   </div>
   {% endfor %}
 </div>
